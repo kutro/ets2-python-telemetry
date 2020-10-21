@@ -6,7 +6,7 @@ from ets2sdkdata import Ets2SdkData
 
 class SharedMemory:
     def __init__(self):
-        self.map_name = "Local\\SimTelemetryETS2"
+        self.map_name = "Local\\SCSTelemetry"
         self.map_size = 1024
         self.mmap = None
 
@@ -142,3 +142,10 @@ class SharedMemory:
     def retrieve_array(self, f, start, end):
         array_data = struct.unpack(f, self.mmap[start:end])
         return array_data
+
+
+qwe = SharedMemory()
+print(qwe.update().truckModel)
+
+
+# 401298464324817e-44

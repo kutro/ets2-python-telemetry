@@ -19,3 +19,6 @@ class Ets2SdkTelemetry:
 
         if not self.threading_event.isSet():
             threading.Timer(self.interval, self.elapsed).start()
+
+
+
