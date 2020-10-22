@@ -86,11 +86,11 @@ class SharedMemory(TelemetryMap):
 
 
 class FormatDate(SharedMemory):
-    # так как игровое время начинаетсся с понедельника 10:00 мы возьмем за точку отчета понедельник 10:00 1 января
-    #  2018 год, так как это реальный ближайший к нам год.
+    """ так как игровое время начинаетсся с понедельника 10:00 мы возьмем за точку отчета понедельник 10:00 1 января
+    2018 года, так как это реальный ближайший к нам год. """
+    TIME_TUPLE = (2018, 1, 1, 0, 0, 0, 6, 0, 0)                        # соответсвует 01,01,2018 г 00:00 Пон
 
     def formatDate(self, timeGame):                                         # ожидаем количество минут в игре
-        self.TIME_TUPLE = (2018, 1, 1, 0, 0, 0, 6, 0, 0)                    # соответсвует 01,01,2018 г 00:00 Пон
         self.timestamp = (time.mktime(self.TIME_TUPLE)) + (timeGame * 60)   # переводим в UNIX Time и добавляем
         # количество секунд из игры
         self.timestamp = datetime.fromtimestamp(self.timestamp)             # переводим обратно из UNIX Time
@@ -99,6 +99,6 @@ class FormatDate(SharedMemory):
 
 
 qwe = SharedMemory()
-timeGameMap = qwe.update(*qwe.jobStartingTime)[0]
+timeGameMap = qwe.update(*qwe.time_abs)[0]
 timeGame = FormatDate()
 print (timeGame.formatDate(timeGameMap))
